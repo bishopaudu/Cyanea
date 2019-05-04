@@ -182,7 +182,7 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     }
   }
 
-  private inline fun <reified T : Preference> findPreference(key: String): T = super.findPreference(key) as T
+  private inline fun <reified T : Preference> findPreference(key: String): T = super.findPreference<Preference>(key) as T
 
   companion object {
     private const val PREF_CATEGORY = "cyanea_preference_category"

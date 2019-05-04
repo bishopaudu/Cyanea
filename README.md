@@ -14,10 +14,10 @@
 # About
 
 A powerful, dynamic, and fun theme engine. Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.
-<br>
+<br><br>
 At here, we will try to keep everything cutting edge (latest) and it might contain experimental features.
 You are welcome to submit your pull request
-
+<br><br><br><br>
 # Downloads
 
 Download [the latest AAR](https://github.com/evozi/Cyanea/releases) or grab via Gradle:
@@ -26,27 +26,25 @@ Download [the latest AAR](https://github.com/evozi/Cyanea/releases) or grab via 
 
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
- ```
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
 
  Step 2. Add the dependency
 
- ```
+```
 dependencies {
-	        implementation 'com.github.evozi:Cyanea:1.0.2'
-	}
- ```
-
+    implementation 'com.github.evozi:Cyanea:1.0.2'
+}
+```
 
 ## Demo
 
 You can download an [APK of the demo project](https://github.com/evozi/Cyanea/blob/master/demo.apk?raw=true)
 
-<br>
 
 # Getting Started
 

@@ -1,4 +1,4 @@
-# Cyanea
+# Cyanea (Cutting Edge)
 
 <img src="https://i.imgur.com/eC6d5WO.gif" align="left" hspace="10" vspace="10"></a>
 
@@ -7,25 +7,44 @@
 <sub>Themes are immutable, possibilities are beautiful.</sub>
 
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
-<a target="_blank" href="https://travis-ci.org/jaredrummler/Cyanea"><img src="https://travis-ci.org/jaredrummler/Cyanea.svg?branch=master" alt="Build Status" /></a>
-<a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea"><img src="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea/badge.svg" alt="Maven Central" /></a>
+<a target="_blank" href="https://travis-ci.org/evozi/Cyanea"><img src="https://travis-ci.org/evozi/Cyanea.svg?branch=master" alt="Build Status" /></a>
+[![](https://jitpack.io/v/evozi/Cyanea.svg)](https://jitpack.io/#evozi/Cyanea)
 <a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
 
 # About
 
 A powerful, dynamic, and fun theme engine. Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.
+<br>
+At here, we will try to keep everything cutting edge (latest) and it might contain experimental features.
+You are welcome to submit your pull request
 
 # Downloads
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/cyanea/1.0.1/cyanea-1.0.1.aar) or grab via Gradle:
+Download [the latest AAR](https://github.com/evozi/Cyanea/releases) or grab via Gradle:
 
-```groovy
-implementation 'com.jaredrummler:cyanea:1.0.1'
+ Step 1. Add this in your root build.gradle at the end of repositories:
+
 ```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+ ```
+
+ Step 2. Add the dependency
+
+ ```
+dependencies {
+	        implementation 'com.github.evozi:Cyanea:1.0.2'
+	}
+ ```
+
 
 ## Demo
 
-You can download an [APK of the demo project](https://github.com/jaredrummler/Cyanea/blob/master/demo.apk?raw=true)
+You can download an [APK of the demo project](https://github.com/evozi/Cyanea/blob/master/demo.apk?raw=true)
 
 <br>
 
@@ -71,7 +90,7 @@ class MyActivity : CyaneaAppCompatActivity() {
 }
 ```
 
-If you can't extend your activity class, create a `CyaneaDelegate` and add the appropriate methods. See [CyaneaAppCompatActivity.kt](https://github.com/jaredrummler/Cyanea/blob/master/library/src/main/java/com/jaredrummler/cyanea/app/CyaneaAppCompatActivity.kt) as an example.
+If you can't extend your activity class, create a `CyaneaDelegate` and add the appropriate methods. See [CyaneaAppCompatActivity.kt](https://github.com/evozi/Cyanea/blob/master/library/src/main/java/com/jaredrummler/cyanea/app/CyaneaAppCompatActivity.kt) as an example.
 
 #### Step 3
 
@@ -117,7 +136,7 @@ The following activites are added to launch the preferences and theme picker: `C
 
 #### Pre-defined themes
 
-To override and create your own pre-defined themes add the following file to your project: `assets/themes/cyanea_themes.json`. The file must be a JSON array with each theme as seen [here](https://github.com/jaredrummler/Cyanea/blob/master/library/src/main/assets/themes/cyanea_themes.json).
+To override and create your own pre-defined themes add the following file to your project: `assets/themes/cyanea_themes.json`. The file must be a JSON array with each theme as seen [here](https://github.com/evozi/Cyanea/blob/master/library/src/main/assets/themes/cyanea_themes.json).
 
 Minimal JSON required for a pre-defined theme:
 
@@ -217,7 +236,7 @@ class MyActivity : Activity(), CyaneaDecorator.Provider {
 }
 ```
 
-Please reference the [FontDecorator](https://github.com/jaredrummler/Cyanea/blob/master/library/src/main/java/com/jaredrummler/cyanea/inflator/decor) as an example.
+Please reference the [FontDecorator](https://github.com/evozi/Cyanea/blob/master/library/src/main/java/com/jaredrummler/cyanea/inflator/decor) as an example.
 
 ### Inflation Delegate
 

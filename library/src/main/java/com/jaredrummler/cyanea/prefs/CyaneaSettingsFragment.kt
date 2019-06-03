@@ -134,38 +134,6 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     return true
   }
 
-  override fun onCreateAdapter(preferenceScreen: PreferenceScreen): RecyclerView.Adapter<*> {
-    return object : PreferenceGroupAdapter(preferenceScreen) {
-      @SuppressLint("RestrictedApi")
-      override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
-        if (iconSpaceReserved) return
-        // See: https://stackoverflow.com/a/51568782/1048340
-        val preference = getItem(position)
-        if (preference is PreferenceCategory) {
-          setZeroPaddingToLayoutChildren(holder.itemView)
-        } else {
-          holder.itemView.findViewById<View>(R.id.icon_frame)?.let { iconFrame ->
-            iconFrame.visibility = if (preference.icon == null) View.GONE else View.VISIBLE
-          }
-        }
-      }
-    }
-  }
-
-  // See: https://stackoverflow.com/a/51568782/1048340
-  private fun setZeroPaddingToLayoutChildren(view: View) {
-    if (view !is ViewGroup) return
-    for (i in 0 until view.childCount) {
-      setZeroPaddingToLayoutChildren(view.getChildAt(i))
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        view.setPaddingRelative(0, view.paddingTop, view.paddingEnd, view.paddingBottom)
-      } else {
-        view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
-      }
-    }
-  }
-
   private fun setupNavBarPref() {
     ColorUtils.isDarkColor(cyanea.primary, 0.75).let { isDarkEnough ->
       prefColorNavBar.isEnabled = isDarkEnough || VERSION.SDK_INT >= VERSION_CODES.O

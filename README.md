@@ -37,7 +37,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.evozi:Cyanea:1.0.2'
+    implementation 'com.github.evozi:Cyanea:1.0.3'
 }
 ```
 
@@ -182,7 +182,7 @@ Attributes:
 - `?menuIconColor`
 - `?subMenuIconColor`
 
-Example: 
+Example:
 
 ```xml
 <com.example.MyCustomView
@@ -238,7 +238,7 @@ Please reference the [FontDecorator](https://github.com/evozi/Cyanea/blob/master
 
 ### Inflation Delegate
 
-You can add an inflation delegate to hook into when views are created and create the views yourself. 
+You can add an inflation delegate to hook into when views are created and create the views yourself.
 
 Example:
 

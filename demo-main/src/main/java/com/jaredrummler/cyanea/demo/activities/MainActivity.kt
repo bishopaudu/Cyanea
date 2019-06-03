@@ -116,7 +116,7 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
 
   class DemoPagerAdapter(
       private val activity: FragmentActivity
-  ) : FragmentStatePagerAdapter(activity.supportFragmentManager) {
+  ) : FragmentStatePagerAdapter(activity.supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val items = activity.resources.getStringArray(R.array.tabs)
 

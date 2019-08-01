@@ -33,6 +33,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.view.menu.MenuItemImpl
 import androidx.appcompat.widget.ActionMenuView
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -161,14 +162,14 @@ class MenuTint(
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          ColorUtils.setColorFilterSrcIn(navigationIcon, color)
         }
       }
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && actionBar is Toolbar) {
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          ColorUtils.setColorFilterSrcIn(navigationIcon, color)
         }
       }
     }
@@ -203,7 +204,7 @@ class MenuTint(
     fun colorMenuItem(menuItem: MenuItem, color: Int?, alpha: Int? = null) {
       menuItem.icon?.let { icon ->
         val drawable = icon.mutate()
-        color?.let { drawable.setColorFilter(it, PorterDuff.Mode.SRC_IN) }
+        color?.let { ColorUtils.setColorFilterSrcIn(drawable, it) }
         alpha?.let { drawable.alpha = it }
         menuItem.icon = drawable
       }

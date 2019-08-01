@@ -20,6 +20,11 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.core.graphics.ColorUtils
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
+import android.os.Build
 
 class ColorUtils private constructor() {
 
@@ -225,6 +230,22 @@ class ColorUtils private constructor() {
       }
     }
 
-  }
+    fun setColorFilterSrcAtop(drawable: Drawable?, color: Int) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        drawable?.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
+      } else {
+        @Suppress("DEPRECATION")
+        drawable?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+      }
+    }
 
+    fun setColorFilterSrcIn(drawable: Drawable?, color: Int) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        drawable?.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+      } else {
+        @Suppress("DEPRECATION")
+        drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+      }
+    }
+  }
 }

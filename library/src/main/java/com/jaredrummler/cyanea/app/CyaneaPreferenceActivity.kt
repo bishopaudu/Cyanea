@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
-import android.preference.PreferenceActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
@@ -28,6 +27,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.FragmentActivity
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
@@ -38,7 +38,7 @@ import com.jaredrummler.cyanea.delegate.CyaneaDelegate
  *
  * You must implement [BaseCyaneaActivity.getThemeResId] and return a valid cyanea theme.
  */
-abstract class CyaneaPreferenceActivity : PreferenceActivity(),
+abstract class CyaneaPreferenceActivity : FragmentActivity(),
     BaseAppCompatDelegate, BaseCyaneaActivity {
 
   private val appCompatDelegate: AppCompatDelegate by lazy {

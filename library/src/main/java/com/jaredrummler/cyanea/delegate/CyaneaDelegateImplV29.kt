@@ -2,13 +2,14 @@ package com.jaredrummler.cyanea.delegate
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 
-@RequiresApi(Build_VERSION_CODES_Q)
-@TargetApi(Build_VERSION_CODES_Q)
+@RequiresApi(Build.VERSION_CODES.Q)
+@TargetApi(Build.VERSION_CODES.Q)
 internal open class CyaneaDelegateImplV29(
         activity: Activity,
         private val cyanea: Cyanea,

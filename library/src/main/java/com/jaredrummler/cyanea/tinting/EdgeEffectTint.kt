@@ -32,6 +32,7 @@ import androidx.core.widget.EdgeEffectCompat
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -84,7 +85,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
         }
         for (name in arrayOf("mEdge", "mGlow")) {
           val drawable = Reflection.getFieldValue<Drawable?>(edgeEffect, name)
-          drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          ColorUtils.setColorFilterSrcIn(drawable, color)
           drawable?.callback = null // free up any references
         }
       } catch (e: Exception) {

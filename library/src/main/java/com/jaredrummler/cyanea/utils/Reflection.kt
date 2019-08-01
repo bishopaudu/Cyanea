@@ -143,10 +143,8 @@ class Reflection private constructor() {
       while (klass != null) {
         try {
           method = klass.getDeclaredMethod(name, *types)
-          if (method != null) {
-            method.isAccessible = true
-            break
-          }
+          method.isAccessible = true
+          break
         } catch (ignored: NoSuchMethodException) {
         }
         klass = klass.superclass

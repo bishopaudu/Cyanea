@@ -113,13 +113,13 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
 
   @RequiresApi(Build.VERSION_CODES.M)
   @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int): ColorStateList? {
+  override fun getColorStateList(id: Int): ColorStateList {
     return super.getColorStateList(id)
   }
 
   @RequiresApi(Build.VERSION_CODES.M)
   @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList? {
+  override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList {
     val colorStateList = super.getColorStateList(id, theme)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (!tintTracker.contains(id, theme)) {
@@ -131,7 +131,6 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   }
 
   private inner class TintTracker {
-
     private val cache: MutableSet<Int> by lazy {
       Collections.newSetFromMap(ConcurrentHashMap<Int, Boolean>())
     }
@@ -141,12 +140,9 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
     internal fun add(id: Int, theme: Resources.Theme?): Boolean = cache.add(key(id, theme))
 
     private fun key(id: Int, theme: Resources.Theme?): Int = id + (theme?.hashCode() ?: 0)
-
   }
 
   companion object {
     private const val TAG = "CyaneaResources"
-
   }
-
 }

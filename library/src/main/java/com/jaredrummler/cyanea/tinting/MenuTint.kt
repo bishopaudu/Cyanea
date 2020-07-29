@@ -33,7 +33,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.view.menu.MenuItemImpl
 import androidx.appcompat.widget.ActionMenuView
 import com.jaredrummler.cyanea.Cyanea
-import com.jaredrummler.cyanea.utils.ColorUtils
+import com.jaredrummler.cyanea.utils.ColorFilterCompat
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -63,17 +63,17 @@ import com.jaredrummler.cyanea.utils.Reflection
  * @param tintNavigationIcon `true` to tint the navigation icon. True by default.
  */
 class MenuTint(
-    val menu: Menu,
-    @ColorInt private var menuIconColor: Int? = null,
-    private var menuIconAlpha: Int? = null,
-    @ColorInt private val subIconColor: Int? = null,
-    private val subIconAlpha: Int? = null,
-    @DrawableRes private val overflowDrawableRes: Int? = null,
-    @ColorInt private val originalMenuIconColor: Int? = null,
-    private val reApplyOnChange: Boolean = false,
-    private val forceIcons: Boolean = false,
-    private val tintOverflowIcon: Boolean = true,
-    private val tintNavigationIcon: Boolean = true
+        val menu: Menu,
+        @ColorInt private var menuIconColor: Int? = null,
+        private var menuIconAlpha: Int? = null,
+        @ColorInt private val subIconColor: Int? = null,
+        private val subIconAlpha: Int? = null,
+        @DrawableRes private val overflowDrawableRes: Int? = null,
+        @ColorInt private val originalMenuIconColor: Int? = null,
+        private val reApplyOnChange: Boolean = false,
+        private val forceIcons: Boolean = false,
+        private val tintOverflowIcon: Boolean = true,
+        private val tintNavigationIcon: Boolean = true
 ) {
 
   private var actionBar: ViewGroup? = null
@@ -162,14 +162,16 @@ class MenuTint(
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          ColorUtils.setColorFilterSrcIn(navigationIcon, color)
+          @Suppress("DEPRECATION")
+          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
       }
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && actionBar is Toolbar) {
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          ColorUtils.setColorFilterSrcIn(navigationIcon, color)
+          @Suppress("DEPRECATION")
+          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
       }
     }
@@ -202,9 +204,8 @@ class MenuTint(
      * @param alpha The alpha value (0...255) to set on the icon or `null` for no changes.
      */
     fun colorMenuItem(menuItem: MenuItem, color: Int?, alpha: Int? = null) {
-      menuItem.icon?.let { icon ->
-        val drawable = icon.mutate()
-        color?.let { ColorUtils.setColorFilterSrcIn(drawable, it) }
+      menuItem.icon?.mutate()?.let { drawable ->
+        color?.let { drawable.colorFilter = ColorFilterCompat.SRC_IN.get(it) }
         alpha?.let { drawable.alpha = it }
         menuItem.icon = drawable
       }
@@ -259,7 +260,8 @@ class MenuTint(
      * @param menu The menu to force icons to show
      */
     fun forceMenuIcons(menu: Menu) {
-      Reflection.invoke<Any?>(menu, "setOptionalIconsVisible", arrayOf(Boolean::class.javaPrimitiveType!!), true)
+      Reflection.invoke<Any?>(menu, "setOptionalIconsVisible",
+              arrayOf(Boolean::class.javaPrimitiveType!!), true)
     }
 
     /**
@@ -282,8 +284,8 @@ class MenuTint(
       while (i < count) {
         val view = viewGroup.getChildAt(i)
         if (view is ImageView &&
-            (view.javaClass.simpleName == "OverflowMenuButton"
-                || view is ActionMenuView.ActionMenuChildView)) {
+                (view.javaClass.simpleName == "OverflowMenuButton" ||
+                        view is ActionMenuView.ActionMenuChildView)) {
           return view
         } else if (view is ViewGroup) {
           findOverflowMenuButton(view)?.let { btn -> return btn }
@@ -312,8 +314,8 @@ class MenuTint(
       val count = viewGroup.childCount
       while (i < count) {
         val view = viewGroup.getChildAt(i)
-        if (view.javaClass == androidx.appcompat.widget.Toolbar::class.java
-            || view.javaClass.name == "android.widget.Toolbar") {
+        if (view.javaClass == androidx.appcompat.widget.Toolbar::class.java ||
+                view.javaClass.name == "android.widget.Toolbar") {
           toolbar = view as ViewGroup
         } else if (view is ViewGroup) {
           toolbar = findToolbar(view)
@@ -325,7 +327,6 @@ class MenuTint(
       }
       return toolbar
     }
-
   }
 
   inner class ActionExpandListener : MenuItem.OnActionExpandListener {
@@ -342,8 +343,5 @@ class MenuTint(
       reapply()
       return true
     }
-
   }
-
-
 }

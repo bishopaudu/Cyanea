@@ -37,7 +37,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.evozi:Cyanea:1.0.5'
+    implementation 'com.github.evozi:Cyanea:1.0.6'
 }
 ```
 
